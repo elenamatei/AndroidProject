@@ -4,6 +4,8 @@
     tools:showIn="navigation_view"
     >
 
+    <group android:checkableBehavior="single">
+
     <item
         android:id="@+id/nav_home"
         android:title="Home"
@@ -25,14 +27,18 @@
         android:id="@+id/nav_settings"
         android:title="Settings"
         android:icon="@drawable/ic_baseline_settings_applications_24"/>
+
+    </group>
     <item
         android:title="Profile">
 
         <menu>
+            <group>
             <item
                 android:id="@+id/nav_login"
                 android:title="Login"
                 android:icon="@drawable/ic_baseline_login_24"/>
+            </group>
         </menu>
 
     </item>
@@ -40,6 +46,7 @@
     <item
         android:title="Communication">
         <menu>
+        <group>
             <item
                 android:id="@+id/nav_share"
                 android:title="Share"
@@ -49,7 +56,7 @@
                 android:title="Give a Review"
                 android:icon="@drawable/ic_baseline_rate_review_24"/>
 
-
+        </group>
         </menu>
 
 

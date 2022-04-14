@@ -8,4 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="underline">#808080</color>
+    <color name="mustard">#948C2B</color>
+    <color name="deep_purple">#594194</color>
+    <color name="lilac">#E5CEED</color>
+    <color name="beige">#F7D7D7</color>
+    <color name="green">#C7DEA4</color>
+    <color name="pink">#FFB6C1</color>
+
+
+
 </resources>
