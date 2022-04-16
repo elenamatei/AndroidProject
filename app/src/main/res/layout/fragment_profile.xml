@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lilac"
     tools:context=".ProfileFragment">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/profile" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,4 +15,11 @@
         android:textColor="@color/black"
         android:textSize="60dp"
         android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="381dp"
+        android:layout_height="331dp"
+        android:src="@drawable/daisy" />
+
 </FrameLayout>

@@ -19,6 +19,17 @@
             android:layout_height="match_parent"
             android:id="@+id/frameLayout"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shareSheetButton"
+            android:text="Visualize your ShareSheet"
+            app:layout_constraintTop_toTopOf = "parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -31,5 +42,6 @@
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"
         />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
