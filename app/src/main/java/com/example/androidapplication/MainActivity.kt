@@ -1,5 +1,6 @@
 package com.example.androidapplication
 
+import android.content.ClipData
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,10 +23,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //shareSheet
-        var openShareSheet = findViewById<Button>(R.id.shareSheetButton)
-        openShareSheet.setOnClickListener{
-            shareMethod()
-        }
+//        var openShareSheet = findViewById<Button>(R.id.nav_share)
+//        openShareSheet.setOnClickListener{
+//            shareMethod()
+//        }
 
         //navigationDrawer
         drawerLayout = findViewById(R.id.drawerLayout)
@@ -36,17 +37,16 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         navView.setNavigationItemSelectedListener {
 
-
             it.isChecked = true
-
+            val intent = Intent(this, RecyclerView::class.java)
             when(it.itemId){
                 R.id.nav_home -> replaceFragment(HomeFragment(), it.title.toString())
                 R.id.nav_login ->  replaceFragment(ProfileFragment(), it.title.toString())
                 R.id.nav_message -> replaceFragment(MessagesFragment(), it.title.toString())
                 R.id.nav_review -> replaceFragment(ReviewFragment(), it.title.toString())
-                R.id.nav_share -> Toast.makeText(applicationContext, "Clicked Share", Toast.LENGTH_SHORT).show()
                 R.id.nav_sync -> replaceFragment(SyncFragment(), it.title.toString())
-                R.id.nav_trash -> replaceFragment(TrashFragment(), it.title.toString())
+                R.id.nav_task ->  startActivity(intent)
+                R.id.nav_share ->  shareMethod()
                 R.id.nav_settings -> replaceFragment(SettingsFragment(), it.title.toString())
 
             }
