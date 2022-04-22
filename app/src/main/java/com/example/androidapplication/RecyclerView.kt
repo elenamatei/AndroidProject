@@ -1,15 +1,25 @@
 package com.example.androidapplication
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+//import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
+import kotlin.collections.ArrayList
 
 class RecyclerView : AppCompatActivity() {
     private lateinit var newRecyclerView: RecyclerView
     private lateinit var newArrayList: ArrayList<Subjects>
     lateinit var textId : Array<String>
     lateinit var imageId : Array<Int>
+   // lateinit var subjects: Array<String>
+
+    //for searchBar
+    private lateinit var searchArrayList: ArrayList<Subjects>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +52,7 @@ class RecyclerView : AppCompatActivity() {
         newRecyclerView.layoutManager = LinearLayoutManager(this)
         newRecyclerView.setHasFixedSize(true)
         newArrayList = arrayListOf<Subjects>()
+        searchArrayList = arrayListOf<Subjects>()
         getData()
 
     }
@@ -52,5 +63,59 @@ class RecyclerView : AppCompatActivity() {
             newArrayList.add(subjects)
         }
         newRecyclerView.adapter = NewAdapter(newArrayList)
+        searchArrayList.addAll(newArrayList)
+
+        val adapter = NewAdapter(searchArrayList)
+
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.search_bar,menu)
+        val item = menu?.findItem(R.id.search)
+        val searchView = item?.actionView as SearchView
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onQueryTextChange(newSearchText: String?): Boolean {
+
+                searchArrayList.clear()
+                val searchText = newSearchText!!.lowercase(Locale.getDefault())
+                if (searchText.isNotEmpty()){
+
+                    newArrayList.forEach{
+                        if (it.text_title.lowercase(Locale.getDefault()).contains(searchText)){
+
+                            searchArrayList.add(it)
+
+                        }
+                    }
+
+                    newRecyclerView.adapter!!.notifyDataSetChanged()
+
+                }else{
+
+                    searchArrayList.clear()
+                    searchArrayList.addAll(newArrayList)
+                    newRecyclerView.adapter!!.notifyDataSetChanged()
+
+                }
+
+
+                return false
+
+            }
+
+
+        })
+
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
 }
