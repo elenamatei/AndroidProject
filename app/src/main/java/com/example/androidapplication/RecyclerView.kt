@@ -4,14 +4,13 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-//import android.widget.SearchView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RecyclerView : AppCompatActivity() {
+class RecyclerView : AppCompatActivity(){
     private lateinit var newRecyclerView: RecyclerView
     private lateinit var newArrayList: ArrayList<Subjects>
     lateinit var textId : Array<String>
@@ -62,10 +61,10 @@ class RecyclerView : AppCompatActivity() {
             val subjects = Subjects(imageId[i],textId[i])
             newArrayList.add(subjects)
         }
-        newRecyclerView.adapter = NewAdapter(newArrayList)
-        searchArrayList.addAll(newArrayList)
 
+        searchArrayList.addAll(newArrayList)
         val adapter = NewAdapter(searchArrayList)
+        newRecyclerView.adapter = NewAdapter(newArrayList)
 
     }
 
@@ -74,9 +73,13 @@ class RecyclerView : AppCompatActivity() {
 
         menuInflater.inflate(R.menu.search_bar,menu)
         val item = menu?.findItem(R.id.search)
-        val searchView = item?.actionView as SearchView
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        val searchView = item?.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
+                if(query!= null){
+//                    getData(query)
+                }
                 return true
             }
 
@@ -88,7 +91,7 @@ class RecyclerView : AppCompatActivity() {
                 if (searchText.isNotEmpty()){
 
                     newArrayList.forEach{
-                        if (it.text_title.lowercase(Locale.getDefault()).contains(searchText)){
+                        if (it.text_title .lowercase(Locale.getDefault()).contains(searchText)){
 
                             searchArrayList.add(it)
 

@@ -7,19 +7,21 @@
     android:background="@color/teal_200"
     tools:context=".ReviewFragment">
 
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="381dp"
+        android:layout_height="309dp"
+        android:src="@drawable/starrate" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Review"
+        android:text="Rate us! :)"
         android:textColor="@color/black"
-        android:textSize="60dp"
+        android:textSize="40dp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="316dp"
-        android:src="@drawable/stitch" />
 
 </FrameLayout>
