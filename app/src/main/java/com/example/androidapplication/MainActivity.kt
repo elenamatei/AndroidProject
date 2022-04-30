@@ -39,8 +39,9 @@ class MainActivity : AppCompatActivity() {
 
             it.isChecked = true
             val intent = Intent(this, RecyclerView::class.java)
+            val newIntent = Intent(this, CameraActivity::class.java)
             when(it.itemId){
-                R.id.nav_home -> replaceFragment(HomeFragment(), it.title.toString())
+                R.id.nav_camera -> startActivity(newIntent)
                 R.id.nav_login ->  replaceFragment(ProfileFragment(), it.title.toString())
                 R.id.nav_message -> replaceFragment(MessagesFragment(), it.title.toString())
                 R.id.nav_review -> replaceFragment(ReviewFragment(), it.title.toString())
