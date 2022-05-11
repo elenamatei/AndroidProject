@@ -1,6 +1,6 @@
 package com.example.androidapplication
 
-import android.annotation.SuppressLint
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -15,7 +15,6 @@ class RecyclerView : AppCompatActivity(){
     private lateinit var newArrayList: ArrayList<Subjects>
     lateinit var textId : Array<String>
     lateinit var imageId : Array<Int>
-   // lateinit var subjects: Array<String>
 
     //for searchBar
     private lateinit var searchArrayList: ArrayList<Subjects>
@@ -63,8 +62,7 @@ class RecyclerView : AppCompatActivity(){
         }
 
         searchArrayList.addAll(newArrayList)
-        val adapter = NewAdapter(searchArrayList)
-        newRecyclerView.adapter = NewAdapter(newArrayList)
+        newRecyclerView.adapter = NewAdapter(searchArrayList)
 
     }
 
@@ -78,18 +76,16 @@ class RecyclerView : AppCompatActivity(){
         searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if(query!= null){
-//                    getData(query)
+                    getData()
                 }
                 return true
             }
 
-            @SuppressLint("NotifyDataSetChanged")
             override fun onQueryTextChange(newSearchText: String?): Boolean {
 
                 searchArrayList.clear()
                 val searchText = newSearchText!!.lowercase(Locale.getDefault())
                 if (searchText.isNotEmpty()){
-
                     newArrayList.forEach{
                         if (it.text_title .lowercase(Locale.getDefault()).contains(searchText)){
 
@@ -97,14 +93,13 @@ class RecyclerView : AppCompatActivity(){
 
                         }
                     }
-
-                    newRecyclerView.adapter!!.notifyDataSetChanged()
+                    println(searchArrayList.toString())
+                    newRecyclerView.adapter = NewAdapter(searchArrayList)
 
                 }else{
-
                     searchArrayList.clear()
                     searchArrayList.addAll(newArrayList)
-                    newRecyclerView.adapter!!.notifyDataSetChanged()
+                    newRecyclerView.adapter = NewAdapter(searchArrayList)
 
                 }
 

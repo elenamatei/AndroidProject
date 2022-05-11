@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
@@ -47,18 +48,12 @@ class CameraActivity : AppCompatActivity() {
                 if (isWritePermissionGranted){
 
                     if (savePhotoToExternalStorage(UUID.randomUUID().toString(),it)){
-
                         Toast.makeText(this@CameraActivity,"Photo Saved Successfully",Toast.LENGTH_SHORT).show()
-
                     }else{
-
                         Toast.makeText(this@CameraActivity,"Failed to Save photo",Toast.LENGTH_SHORT).show()
                     }
-
                 }else{
-
                     Toast.makeText(this@CameraActivity,"Permission not Granted",Toast.LENGTH_SHORT).show()
-
                 }
 
             }
@@ -67,10 +62,9 @@ class CameraActivity : AppCompatActivity() {
 
         binding.saveButton.setOnClickListener {
             takePhoto.launch()
-           /// startActivity(Intent(this,ReadExternalStorage::class.java))
         }
 
-
+        init()
     }
 
     private fun sdkCheck() : Boolean{
@@ -102,14 +96,10 @@ class CameraActivity : AppCompatActivity() {
 
         val permissionRequest = mutableListOf<String>()
         if (!isWritePermissionGranted){
-
             permissionRequest.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
         }
         if (!isReadPermissionGranted){
-
             permissionRequest.add(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-
         }
 
         if (permissionRequest.isNotEmpty())
@@ -162,5 +152,38 @@ class CameraActivity : AppCompatActivity() {
         }
 
     }
+
+    //take photo from gallery
+    private fun init(){
+
+        val pickPhoto = registerForActivityResult(
+            ActivityResultContracts.GetContent()
+        ) {
+
+            binding.pickedImage.setImageURI(it)
+
+
+        }
+
+        binding.btnGallery.setOnClickListener {
+
+            if (ContextCompat.checkSelfPermission(this,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+
+                pickPhoto.launch("image/*")
+
+            }else{
+
+                Toast.makeText(this,"Read Permission is not Granted", Toast.LENGTH_SHORT).show()
+
+            }
+
+        }
+
+
+    }
+
+
+
 
 }
